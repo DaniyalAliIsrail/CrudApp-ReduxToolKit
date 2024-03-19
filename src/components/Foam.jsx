@@ -15,6 +15,7 @@ const Foam = () => {
     console.log("user...>", user);
     dispatch(createUser(user));
   };
+  
   return (
     <form onSubmit={handleSubmit} className="w-50 mx-auto mt-2">
       <div className="row mb-4">

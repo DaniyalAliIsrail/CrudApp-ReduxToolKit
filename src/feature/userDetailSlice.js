@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
+
 // create Action
 export const createUser = createAsyncThunk("createUser",async(data,{rejectWithValue})=>{
   const res =await fetch("https://65f76cefb4f842e808859767.mockapi.io/crud",{
@@ -42,3 +43,6 @@ export const userDetails = createSlice({
 });
 
 export default userDetails.reducer;
+
+
+
