@@ -1,21 +1,24 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { createUser } from "../feature/userDetailSlice";
+import { useNavigate } from "react-router-dom";
 const Foam = () => {
   const [user, setUser] = useState({});
-  console.log(user);
+  // console.log(user);
   const getserData = (e) => {
     e.preventDefault();
     setUser({ ...user, [e.target.name]: e.target.value });
   };
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("user...>", user);
+    // console.log("user...>", user);
     dispatch(createUser(user));
+    navigate("/read");
   };
-  
+
   return (
     <form onSubmit={handleSubmit} className="w-50 mx-auto mt-2">
       <div className="row mb-4">
@@ -89,10 +92,7 @@ const Foam = () => {
         />
         <label className="form-check-label">feMale</label>
       </div>
-      <button
-        type="submit"
-        className="btn btn-dark btn-block mb-4"
-      >
+      <button type="submit" className="btn btn-dark btn-block mb-4">
         Submit
       </button>
     </form>

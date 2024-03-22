@@ -15,13 +15,14 @@ import {
   MDBDropdownItem,
   MDBCollapse,
 } from 'mdb-react-ui-kit';
+import { Link } from 'react-router-dom';
 
 const Mynavbar = () => {
   const [openBasic, setOpenBasic] = useState(false);
   return (
     <MDBNavbar expand='lg' light bgColor='light'>
       <MDBContainer fluid>
-        <MDBNavbarBrand href='#'>ReduxCrud</MDBNavbarBrand>
+        <MDBNavbarBrand >ReduxCrud</MDBNavbarBrand>
 
         <MDBNavbarToggler
           aria-controls='navbarSupportedContent'
@@ -40,7 +41,9 @@ const Mynavbar = () => {
               </MDBNavbarLink>
             </MDBNavbarItem>
             <MDBNavbarItem>
-              <MDBNavbarLink href='#'>All post</MDBNavbarLink>
+              <Link to="/read">
+              <MDBNavbarLink>All post</MDBNavbarLink>
+              </Link>
             </MDBNavbarItem>
           </MDBNavbarNav>
 
