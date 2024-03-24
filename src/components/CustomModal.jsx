@@ -1,6 +1,6 @@
 import React from 'react';
 import "./customModal.css";
-import { useSelector } from 'react-redux';
+import {  useSelector } from 'react-redux';
 
 const CustomModal = ({id,showPopup ,setShowPopup}) => {
     const allUser = useSelector((state)=>{
@@ -10,6 +10,7 @@ const CustomModal = ({id,showPopup ,setShowPopup}) => {
     const singleUser = allUser.filter((ele)=>{
         return ele.id === id
     })
+
   return (
     <div className='modalbackground'>
         <div className='modalContainer'>
