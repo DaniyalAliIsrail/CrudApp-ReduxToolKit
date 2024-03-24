@@ -29,10 +29,25 @@ export const showUser = createAsyncThunk("showUser",async(rejectWithValue)=>{
   }
 })
 
+//del action
+export const deleteUser = createAsyncThunk("deleteUser",async(id,{rejectWithValue})=>{
+  const res = await fetch(`https://65f76cefb4f842e808859767.mockapi.io/crud/${id}`,{method: "DELETE"});
+  try{
+    const result = await res.json()
+    console.log(result);
+    return result
+  }catch(error){
+    rejectWithValue(error)
+  }
+})
+
+
+
+
 //update action 
 
 export const updateUser = createAsyncThunk("updateUser",async(data,{rejectWithValue})=>{
-  const res =await fetch("https://65f76cefb4f842e808859767.mockapi.io/crud",{
+  const res =await fetch(`https://65f76cefb4f842e808859767.mockapi.io/crud/${data.id}`,{
     method:"put",
     headers:{
       "Content-Type":"Application/json",
@@ -46,6 +61,10 @@ export const updateUser = createAsyncThunk("updateUser",async(data,{rejectWithVa
     rejectWithValue(error)
   }
 })
+
+
+
+
 
 
 export const userDetails = createSlice({
@@ -80,20 +99,35 @@ export const userDetails = createSlice({
         state.loading = false;
         state.error = action.error.message
       })
+
+      .addCase(deleteUser.pending, (state) => {
+        state.loading = true;
+      })
+
+      .addCase(deleteUser.fulfilled, (state, action) => {
+        state.loading = false;
+        const {id} = (action.payload);
+        state.users = state.users.filter((ele)=>{
+          return ele.id !== id
+        })      })
+      .addCase (deleteUser.rejected,(state,action)=>{
+        state.loading = false;
+        state.error = action.error.message
+      })
+      .addCase(updateUser.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(updateUser.fulfilled, (state, action) => {
+        state.loading = false;
+        state.users = state.users.map((ele)=>(
+         ele.id === action.payload.id ? action.payload : ele
+        ))
+      })
+      .addCase(updateUser.rejected, (state, action) => {
+        state.loading = false;
+        state.users = action.error.message;
+      })
   },
-  // extraReducers:{
-  //   [createUser.pending]: (state) => {
-  //     state.loading = true;
-  //   },
-  //   [createUser.fulfilled]: (state) => {
-  //     state.loading = false;
-  //     state.users.push(action.payload);
-  //   },
-  //   [createUser.rejected]: (state, action) => {
-  //     state.loading = false;
-  //     state.error = action.payload.message
-  //   },
-  // }
 });
 export default userDetails.reducer;
 
