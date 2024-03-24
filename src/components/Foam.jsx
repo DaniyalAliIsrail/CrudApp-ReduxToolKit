@@ -4,7 +4,7 @@ import { createUser } from "../feature/userDetailSlice";
 import { useNavigate } from "react-router-dom";
 const Foam = () => {
   const [user, setUser] = useState({});
-  // console.log(user);
+  console.log(user);
   const getserData = (e) => {
     e.preventDefault();
     setUser({ ...user, [e.target.name]: e.target.value });
@@ -63,8 +63,8 @@ const Foam = () => {
         <input
           onChange={getserData}
           type="text"
-          name="Age"
-          id="form3Example4"
+          name="Agehay"
+          id="form4Example4"
           className="form-control border border-dark"
         />
         <label className="form-label">Age</label>
@@ -77,7 +77,7 @@ const Foam = () => {
           name="gender"
           value="male"
           type="checkbox"
-          id="form2Example23"
+          id="form5Example23"
         />
         <label className="form-check-label ">Male</label>
       </div>

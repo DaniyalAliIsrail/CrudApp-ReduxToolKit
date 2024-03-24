@@ -9,21 +9,23 @@ import {
   MDBNavbarItem,
   MDBNavbarLink,
   MDBBtn,
-  MDBDropdown,
-  MDBDropdownToggle,
-  MDBDropdownMenu,
-  MDBDropdownItem,
   MDBCollapse,
 } from 'mdb-react-ui-kit';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom'; 
+import { useSelector } from 'react-redux';
 
 const Mynavbar = () => {
+  const allUser = useSelector((state)=>{
+    return state.app.users;
+  });
   const [openBasic, setOpenBasic] = useState(false);
+
   return (
     <MDBNavbar expand='lg' light bgColor='light'>
       <MDBContainer fluid>
-        <MDBNavbarBrand >ReduxCrud</MDBNavbarBrand>
-
+        <Link to="/"> {/* Use Link component here */}
+          <MDBNavbarBrand>ReduxCrud</MDBNavbarBrand>
+        </Link>
         <MDBNavbarToggler
           aria-controls='navbarSupportedContent'
           aria-expanded='false'
@@ -36,13 +38,13 @@ const Mynavbar = () => {
         <MDBCollapse navbar open={openBasic}>
           <MDBNavbarNav className='mr-auto mb-2 mb-lg-0'>
             <MDBNavbarItem>
-              <MDBNavbarLink active >
-                create Post 
-              </MDBNavbarLink>
+              {/* Use Link component here */}
+                <MDBNavbarLink active>Create Post</MDBNavbarLink>
+              
             </MDBNavbarItem>
             <MDBNavbarItem>
-              <Link to="/read">
-              <MDBNavbarLink>All post</MDBNavbarLink>
+              <Link to="/read"> 
+                <MDBNavbarLink>All post : {allUser.length}</MDBNavbarLink>
               </Link>
             </MDBNavbarItem>
           </MDBNavbarNav>
@@ -54,7 +56,6 @@ const Mynavbar = () => {
         </MDBCollapse>
       </MDBContainer>
     </MDBNavbar>
-  )
-}
-
-export default Mynavbar
+  );
+};
+export default Mynavbar;
