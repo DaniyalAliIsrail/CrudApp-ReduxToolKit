@@ -5,20 +5,23 @@ import CustomModal from "./CustomModal";
 import { Link } from "react-router-dom";
 
 const Read = () => {
-  const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(showUser());
-  }, []);
-  
-  const { users, laoding } = useSelector((state) => state.app);
-  console.log(users.Agehay);
 
   const [id, setId] = useState();
   console.log(id);
 
+  const { users, laoding } = useSelector((state) => state.app);
+  console.log(users);
+
   const [showPopup, setShowPopup] = useState(false);
 
+  if (laoding) {
+    return <div>Loading...</div>;
+  }
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(showUser());
+  }, []);
   return (
     <>
       {showPopup && (
@@ -28,11 +31,14 @@ const Read = () => {
           setShowPopup={setShowPopup}
         />
       )}
+      <button onClick={()=> setShowPopup(true)}>
+        view
+      </button>
 
       <div className="w-100  d-flex justify-content-around flex-lg-wrap gap-4">
         {users &&
-          users.map((data) => (
-            <div key={data && data.id} className="card w-25">
+          users?.map((data, index) => (
+            <div key={index} className="card w-25">
               <div className="view overlay">
                 <img
                   className="card-img-top"
@@ -46,22 +52,37 @@ const Read = () => {
                 <hr />
                 <p className="card-text">{data && data.email}</p>
                 <div className="d-flex justify-content-start gap-2">
-                  <button onClick={()=> dispatch(deleteUser(data.id))} className="text-danger">Delete</button>
+                  <button
+                    onClick={() => dispatch(deleteUser(data.id))}
+                    className="text-danger"
+                  >
+                    Delete
+                  </button>
                   <Link to={`/edit/${data.id}`}>
-                  <div className="text`-primary">update</div>
+                    <div className="text`-primary">update</div>
                   </Link>
-                 
+
                   <button
                     onClick={() => [setId(data.id), setShowPopup(true)]}
                     className="text-secondary"
                   >
                     view
                   </button>
-                </div>
+
+                <button
+                    onClick={() =>
+                      data &&
+                      id !== null && [setId(data.id), setShowPopup(true)]
+                    }
+                    className="text-secondary"
+                  >
+                    view
+                  </button>
+              </div>
               </div>
             </div>
           ))}
-      </div>
+      </div> 
     </>
   );
 };

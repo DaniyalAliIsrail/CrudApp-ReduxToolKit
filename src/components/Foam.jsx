@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { createUser } from "../feature/userDetailSlice";
 import { useNavigate } from "react-router-dom";
 const Foam = () => {
@@ -14,11 +14,12 @@ const Foam = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // console.log("user...>", user);
+    console.log("user...>", user);
     dispatch(createUser(user));
     navigate("/read");
   };
 
+ 
   return (
     <form onSubmit={handleSubmit} className="w-50 mx-auto mt-2">
       <div className="row mb-4">

@@ -22,8 +22,8 @@ export const showUser = createAsyncThunk("showUser",async(rejectWithValue)=>{
   const res =await fetch("https://65f76cefb4f842e808859767.mockapi.io/crud",)
   try{
     const result = await res.json()
+    console.log("SHOW USER RESULT",result);
     return result
-    // console.log(result);
   }catch(error){
     rejectWithValue(error)
   }
@@ -61,11 +61,6 @@ export const updateUser = createAsyncThunk("updateUser",async(data,{rejectWithVa
     rejectWithValue(error)
   }
 })
-
-
-
-
-
 
 export const userDetails = createSlice({
   name: "userDetails",

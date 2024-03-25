@@ -38,8 +38,10 @@ const Mynavbar = () => {
         <MDBCollapse navbar open={openBasic}>
           <MDBNavbarNav className='mr-auto mb-2 mb-lg-0'>
             <MDBNavbarItem>
-              {/* Use Link component here */}
-                <MDBNavbarLink active>Create Post</MDBNavbarLink>
+            <Link to="/">
+            <MDBNavbarLink active>Create Post</MDBNavbarLink>
+
+              </Link>
               
             </MDBNavbarItem>
             <MDBNavbarItem>
@@ -53,6 +55,7 @@ const Mynavbar = () => {
             <input type='search' className='form-control' placeholder='Type query' aria-label='Search' />
             <MDBBtn color='primary'>Search</MDBBtn>
           </form>
+      
         </MDBCollapse>
       </MDBContainer>
     </MDBNavbar>

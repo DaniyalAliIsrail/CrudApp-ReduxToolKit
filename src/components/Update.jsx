@@ -10,7 +10,7 @@ const Update = () => {
 
   const dispatch = useDispatch()
 
-  const [updateData, setupdateData] = useState();
+  const [updateData, setupdateData] = useState({});
   console.log(updateData);
   const { users, loading } = useSelector((state) => {
     return state.app;
